@@ -1,6 +1,7 @@
 package logout
 
 import (
+	"fmt"
 	"net/http"
 	"net/url"
 	"os"
@@ -31,9 +32,9 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
+	fmt.Printf("returnTo: %v", returnTo.String())
 	parameters.Add("returnTo", returnTo.String())
-	parameters.Add("client_id", "YOUR_CLIENT_ID")
+	parameters.Add("client_id", os.Getenv("AUTH0_CLIENT_ID"))
 	logoutURL.RawQuery = parameters.Encode()
 
 	http.Redirect(w, r, logoutURL.String(), http.StatusTemporaryRedirect)

@@ -28,6 +28,6 @@ func Run() error {
 	))
 	r.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("public/"))))
 	http.Handle("/", r)
-	log.Print("Server listening on http://locahost:3000/")
+	log.Print("Server listening on http://localhost:3000/")
 	return http.ListenAndServe("0.0.0.0:3000", nil)
 }

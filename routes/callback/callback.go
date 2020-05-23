@@ -6,6 +6,7 @@ import (
 	"go-auth0/auth"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/coreos/go-oidc"
 )
@@ -43,7 +44,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	oidcConfig := &oidc.Config{
-		ClientID: "YOUR_CLIENT_ID",
+		ClientID: os.Getenv("AUTH0_CLIENT_ID"),
 	}
 
 	idToken, err := authenticator.Provider.Verifier(oidcConfig).Verify(context.TODO(), rawIDToken)
